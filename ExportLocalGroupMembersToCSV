@@ -1,0 +1,18 @@
+#Patrick King, 11-3-2020
+#exports the members of a local windows group to a csv file
+Function LocalGroupMembers-ToCSV{
+param([string]$groupName)
+
+
+    $group = Get-localgroupMember -Group $groupName   #if you want a filter-> |Where-Object{$_.Name -notlike "OLD*" }
+    
+    $fileName ='c:\temp\' + $groupName + 'Members.csv'
+    $group | Export-Csv $fileName
+    write-host "Exported as $fileName"
+
+    foreach($g in $group)
+    {
+        Write-Host $g
+    }
+
+}
