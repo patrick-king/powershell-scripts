@@ -1,0 +1,16 @@
+#Patrick King, 2020-11-03
+##Imports group members from a file, assumes they were exported from another computer via powershell
+function ImportLocalGroupMembers-FromCSV{
+
+param([string]$groupName,
+[string]$filePath)
+
+$members = Import-Csv -Path $filePath
+
+foreach($g in $members)
+    {
+        Write-Host $g 
+        Add-LocalGroupMember -Group $groupName  -Member $g.Name
+    }
+
+}
